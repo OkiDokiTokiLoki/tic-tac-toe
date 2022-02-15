@@ -1,14 +1,13 @@
-const cells = Array.from(document.querySelectorAll('#board div'));
+const squares = Array.from(document.querySelectorAll('#board div'));
 
 let board;
 let turn = 'X';
 
-const cellElements = document.querySelectorAll('[data-cell]').addEventListener('click', handleTurn, {once: true});
+// const cellElements = document.querySelectorAll('[data-cell]').addEventListener('click', handleTurn, {once: true});
+document.getElementById('board').addEventListener('click', handleTurn);
 
 function init(){
     board = ['', '', '', '', '', '', '', '', ''];
-
-    render();
 }
 
 init()
@@ -17,6 +16,17 @@ function render() {
     board.forEach((mark, index) => {
         squares[index].textContent = mark;
     });
+};
+
+function handleTurn(e) {
+    let idx = squares.findIndex(function(square) {
+        return square === e.target;
+    });
+
+    board[idx] = turn;
+
+    turn = turn === 'X' ? 'O' : 'X';
+    render();
 };
 
 // 'use strict'
