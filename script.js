@@ -1,66 +1,29 @@
-const squares = Array.from(document.querySelectorAll('#board div'));
+"use strict";
 
-let board;
-let turn = 'X';
+const player = (sign) => {
+  this.sign = sign;
 
-// const cellElements = document.querySelectorAll('[data-cell]').addEventListener('click', handleTurn, {once: true});
-document.getElementById('board').addEventListener('click', handleTurn);
+  const playerSign = () => {
+    return sign;
+  };
 
-function init(){
-    board = ['', '', '', '', '', '', '', '', ''];
-}
-
-init()
-
-function render() {
-    board.forEach((mark, index) => {
-        squares[index].textContent = mark;
-    });
+  return { playerSign };
 };
 
-function handleTurn(e) {
-    let idx = squares.findIndex(function(square) {
-        return square === e.target;
-    });
+const gameBoard = (() => {
 
-    board[idx] = turn;
+  const board = ['', '', '', '', '', '', '', '', ''];
 
-    turn = turn === 'X' ? 'O' : 'X';
-    render();
-};
+  const setPlayerSign = (index, sign) => {
+    if (index > board.length) return;
+    board[index] = sign;
+  };
 
-// 'use strict'
+  const reset = () => {
+    for (let i = 0; i < board.length; i++){
+      board[i] = '';
+    };
+  };
 
-// const Player = (sign) => {
-//     this.sign = sign;
-
-//     const getSign = () => {
-//         return sign;
-//     }
-
-//     return { getSign };
-// };
-
-// const gameBoard = (() => {
-
-//     const board = ['', '', '', '', '', '', '', '', ''];
-
-//     const setIndex = (index, sign) => { // setField
-//         if (index > board.length) return;
-//         board[index] = sign;
-//     };
-
-//     const getIndex = (index) => { // getIField
-//         if (index > board.length) return;
-//         return board[index];
-//     };
-
-//     const reset = () => {
-//         for (let i = 0; i < board.length; i++){
-//             board[i] = '';
-//         }
-//     };
-
-//     return { setIndex, getIndex, reset }
-
-// })();
+  return { setPlayerSign, reset };
+})();
