@@ -15,6 +15,10 @@
     --white: hsl(255, 100%, 100%);
 }
 
+.close{
+    display: none;
+}
+
 body{
     display: flex;
     flex-direction: column;

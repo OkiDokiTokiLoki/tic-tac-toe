@@ -32,6 +32,51 @@ const gameBoard = (() => {
   return { setPlayerSign, getBoardIndex, reset };
 })();
 
+const displayController = (() => {
+
+  const gridCells = document.querySelectorAll('.cell');
+  const restartButton = document.querySelectorAll('#restart');
+  const popupModal = document.querySelector('#popup');
+
+  gridCells.forEach((cell) => 
+    cell.addEventListener('click', (e) => {
+      if (gameController.gameOver() || e.target.textContent !== '') return;
+      gameController.playRound(parseInt(e.target.dataset.index));
+    updateGameBoard();
+    })
+  );
+
+  const updateGameBoard = () => {
+    for (let i = 0; i < gridCells.length; i++){
+      gridCells[i].textContent = gameBoard.getBoardIndex(i);
+    }
+  };
+
+  const setResultMessage = (winner) => {
+    if (winner === 'draw'){
+      setMessage(`It's a draw`);
+    } else {
+      setMessage(`Player ${winner} has won`);
+    }
+  };
+
+  const setMessage = (message) => {
+    popupModal.textContent = message;
+  }
+
+  restartButton.forEach((button) => 
+    button. addEventListener('click', (e) => {
+      gameBoard.reset();
+      gameController.reset();
+      updateGameBoard();
+      setMessage(`Player X's turn`);
+    })
+  );
+
+  return { setResultMessage, setMessage }
+
+})();
+
 const gameController = (() => {
 
   const playerX = player('X');
@@ -45,17 +90,20 @@ const gameController = (() => {
     gameBoard.setPlayerSign(completedMoveIndex, currentPlayer());
     
     if (winCheck(completedMoveIndex)) {
+      displayController.setResultMessage(currentPlayer());
       gameIsOver = true;
       return;
     }
 
     // game is a draw
     if (round === 9){
+      displayController.setResultMessage('draw');
       gameIsOver = true;
       return;
     }
 
     round++;
+    displayController.setMessage(`Player ${currentPlayer()}'s turn`);
   };
 
   const currentPlayer = () => {
