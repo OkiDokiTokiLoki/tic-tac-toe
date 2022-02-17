@@ -10,18 +10,18 @@
 }
 
 :root {
-    --cell-size: 120px;
-    --mark-size: calc(var(--cell-size) * .9);
-    --white: hsl(255, 100%, 100%);
+    --cell-size: 150px;
+    --white: #fff;
+    --background: hsl(233, 40%, 15%);
 }
 
 body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     height: 100vh;
-    background-color: rgb(19, 18, 53);
+    background-color: var(--background);
     color: var(--white);
 }
 
@@ -33,21 +33,24 @@ body{
     align-content: center;
     justify-items: center;
     align-items: center;
-    grid-template-columns: repeat(3, auto)
+    grid-template-columns: repeat(3, auto);
 }
   
 .cell {
-    width: var(--cell-size);
-    height: var(--cell-size);
-    border: 1px solid var(--white);
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid var(--white);
+    font-weight: bolder;
+    font-size: 8rem;
     cursor: pointer;
+    
 }
 
- .cell:first-child,
+.cell:first-child,
 .cell:nth-child(2),
 .cell:nth-child(3) {
     border-top: none;
@@ -69,33 +72,42 @@ body{
 
 .popup {
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, .9);
-    justify-content: center;
-    align-items: center;
-    color: white;
+    background-color: hsla(0, 0%, 0%, 0.985);
+    color: var(--white);
     font-size: 5rem;
-    flex-direction: column;
 }
 
 .popup button {
     font-size: 3rem;
-    background-color: white;
-    border: 1px solid black;
-    padding: .25em .5em;
+    background-color: var(--white);
+    border: 1px solid var(--background);
+    padding: .3em .5em;
     cursor: pointer;
 }
 
 .popup button:hover {
-    background-color: black;
-    color: white;
-    border-color: white;
+    background-color: var(--background);
+    color: var(--white);
+    border-color: var(--white);
 }
 
 .popup.show {
     display: flex;
+}
+
+footer a{
+    color: rgb(156, 136, 20);
+    text-decoration: none;
+}
+
+footer a:hover{
+    color: var(--white);
 }

@@ -54,9 +54,9 @@ const displayController = (() => {
 
   const setResultMessage = (winner) => {
     if (winner === 'draw'){
-      setMessage(`It's a draw`);
+      setMessage(`it's a draw`);
     } else {
-      setMessage(`Player ${winner} has won`);
+      setMessage(`${winner} has won`);
     }
   };
 
@@ -69,18 +69,18 @@ const displayController = (() => {
       gameBoard.reset();
       gameController.reset();
       updateGameBoard();
-      setMessage(`Player X's turn`);
+      setMessage(`x's turn`);
     })
   );
 
-  return { setResultMessage, setMessage }
+  return { setResultMessage, setMessage };
 
 })();
 
 const gameController = (() => {
 
-  const playerX = player('X');
-  const playerO = player('O');
+  const playerX = player('x');
+  const playerO = player('o');
   const popupContainer = document.querySelector('#popupContainer');
 
   let round = 1;
@@ -106,7 +106,6 @@ const gameController = (() => {
     }
 
     round++;
-    displayController.setMessage(`Player ${currentPlayer()}'s turn`);
   };
 
   const currentPlayer = () => {
@@ -145,5 +144,5 @@ const gameController = (() => {
     gameIsOver = false;
   };
 
-  return { playRound, gameOver, reset }
+  return { playRound, gameOver, reset };
 })();
