@@ -81,6 +81,7 @@ const gameController = (() => {
 
   const playerX = player('X');
   const playerO = player('O');
+  const popupContainer = document.querySelector('#popupContainer');
 
   let round = 1;
   let gameIsOver = false;
@@ -90,6 +91,7 @@ const gameController = (() => {
     gameBoard.setPlayerSign(completedMoveIndex, currentPlayer());
     
     if (winCheck(completedMoveIndex)) {
+      popupContainer.classList.add('show');
       displayController.setResultMessage(currentPlayer());
       gameIsOver = true;
       return;
@@ -97,6 +99,7 @@ const gameController = (() => {
 
     // game is a draw
     if (round === 9){
+      popupContainer.classList.add('show');
       displayController.setResultMessage('draw');
       gameIsOver = true;
       return;
@@ -137,6 +140,7 @@ const gameController = (() => {
   };
 
   const reset = () => {
+    popupContainer.classList.remove('show');
     round = 1;
     gameIsOver = false;
   };
