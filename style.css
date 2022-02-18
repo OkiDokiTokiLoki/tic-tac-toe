@@ -10,7 +10,7 @@
 }
 
 :root {
-    --cell-size: 150px;
+    --cell-size: 120px;
     --white: #fff;
     --background: hsl(233, 40%, 15%);
 }
@@ -47,7 +47,6 @@ body{
     font-weight: bolder;
     font-size: 8rem;
     cursor: pointer;
-    
 }
 
 .cell:first-child,

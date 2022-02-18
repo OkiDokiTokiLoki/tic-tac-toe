@@ -13,14 +13,12 @@ const player = (sign) => {
 const gameBoard = (() => {
   const board = ['', '', '', '', '', '', '', '', ''];
 
-  const setPlayerSign = (index, sign) => {
-    if (index > board.length) return;
-    board[index] = sign;
+  const getBoardIndex = (index) => {
+    return board[index];
   };
 
-  const getBoardIndex = (index) => {
-    if (index > board.length) return;
-    return board[index];
+  const setPlayerSign = (index, sign) => {
+    board[index] = sign;
   };
 
   const reset = () => {
@@ -29,20 +27,20 @@ const gameBoard = (() => {
     };
   };
 
-  return { setPlayerSign, getBoardIndex, reset };
+  return { getBoardIndex, setPlayerSign, reset };
 })();
 
 const displayController = (() => {
 
   const gridCells = document.querySelectorAll('.cell');
-  const restartButton = document.querySelectorAll('#restart');
+  const restartButton = document.querySelector('#restart');
   const popupModal = document.querySelector('#popup');
 
   gridCells.forEach((cell) => 
     cell.addEventListener('click', (e) => {
       if (gameController.gameOver() || e.target.textContent !== '') return;
-      gameController.playRound(parseInt(e.target.dataset.index));
-    updateGameBoard();
+      gameController.playRound(parseInt(e.target.dataset.index)); // sets the completedMoveIndex
+      updateGameBoard();
     })
   );
 
@@ -64,14 +62,12 @@ const displayController = (() => {
     popupModal.textContent = message;
   }
 
-  restartButton.forEach((button) => 
-    button. addEventListener('click', (e) => {
-      gameBoard.reset();
-      gameController.reset();
-      updateGameBoard();
-      setMessage(`x's turn`);
-    })
-  );
+  restartButton.addEventListener('click', (e) => {
+    gameBoard.reset();
+    gameController.reset();
+    updateGameBoard();
+    setMessage(`x's turn`);
+  });
 
   return { setResultMessage, setMessage };
 
