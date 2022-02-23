@@ -11,19 +11,19 @@ const player = (sign) => {
 };
 
 const gameBoard = (() => {
-  const board = ['', '', '', '', '', '', '', '', ''];
+  const _board = ['', '', '', '', '', '', '', '', ''];
 
   const getBoardIndex = (index) => {
-    return board[index];
+    return _board[index];
   };
 
   const setPlayerSign = (index, sign) => {
-    board[index] = sign;
+    _board[index] = sign;
   };
 
   const reset = () => {
-    for (let i = 0; i < board.length; i++){
-      board[i] = '';
+    for (let i = 0; i < _board.length; i++){
+      _board[i] = '';
     };
   };
 
@@ -32,11 +32,11 @@ const gameBoard = (() => {
 
 const displayController = (() => {
 
-  const gridCells = document.querySelectorAll('.cell');
-  const restartButton = document.querySelector('#restart');
-  const popup = document.querySelector('#popup');
+  const _gridCells = document.querySelectorAll('.cell');
+  const _restartButton = document.querySelector('#restart');
+  const _popup = document.querySelector('#popup');
 
-  gridCells.forEach((cell) => 
+  _gridCells.forEach((cell) => 
     cell.addEventListener('click', (e) => {
       if (gameController.gameOver() || e.target.textContent !== '') return;
       gameController.playRound(parseInt(e.target.dataset.index)); // sets the completedMoveIndex
@@ -45,8 +45,8 @@ const displayController = (() => {
   );
 
   const updateGameBoard = () => {
-    for (let i = 0; i < gridCells.length; i++){
-      gridCells[i].textContent = gameBoard.getBoardIndex(i);
+    for (let i = 0; i < _gridCells.length; i++){
+      _gridCells[i].textContent = gameBoard.getBoardIndex(i);
     }
   };
 
@@ -59,10 +59,10 @@ const displayController = (() => {
   };
 
   const setMessage = (message) => {
-    popup.textContent = message;
+    _popup.textContent = message;
   }
 
-  restartButton.addEventListener('click', (e) => {
+  _restartButton.addEventListener('click', (e) => {
     gameBoard.reset();
     gameController.reset();
     updateGameBoard();
@@ -75,37 +75,37 @@ const displayController = (() => {
 
 const gameController = (() => {
 
-  const playerX = player('x');
-  const playerO = player('o');
-  const popupModal = document.querySelector('#popupModal');
+  const _playerX = player('x');
+  const _playerO = player('o');
+  const _popupModal = document.querySelector('#popupModal');
 
-  let round = 1;
-  let gameIsOver = false;
+  let _round = 1;
+  let _gameIsOver = false;
 
   const playRound = (completedMoveIndex) => {
     
     gameBoard.setPlayerSign(completedMoveIndex, currentPlayer());
     
     if (winCheck(completedMoveIndex)) {
-      popupModal.classList.add('show');
+      _popupModal.classList.add('show');
       displayController.setResultMessage(currentPlayer());
-      gameIsOver = true;
+      _gameIsOver = true;
       return;
     }
 
     // game is a draw
-    if (round === 9){
-      popupModal.classList.add('show');
+    if (_round === 9){
+      _popupModal.classList.add('show');
       displayController.setResultMessage('draw');
-      gameIsOver = true;
+      _gameIsOver = true;
       return;
     }
 
-    round++;
+    _round++;
   };
 
   const currentPlayer = () => {
-    return round % 2 === 1 ? playerX.playerSign() : playerO.playerSign();
+    return _round % 2 === 1 ? _playerX.playerSign() : _playerO.playerSign();
   };
 
   const winCheck = (completedMoveIndex) => {
@@ -131,13 +131,13 @@ const gameController = (() => {
   };
 
   const gameOver = () => {
-    return gameIsOver;
+    return _gameIsOver;
   };
 
   const reset = () => {
-    popupModal.classList.remove('show');
-    round = 1;
-    gameIsOver = false;
+    _popupModal.classList.remove('show');
+    _round = 1;
+    _gameIsOver = false;
   };
 
   return { playRound, gameOver, reset };
