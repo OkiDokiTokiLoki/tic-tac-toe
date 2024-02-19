@@ -1,42 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="./style.css">
-    <script src="./script.js" defer></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="./style.css" />
+		<script src="./script.js" defer></script>
 
-    <title>tic tac toe</title>
-</head>
-<body>
-    <h1>tic tac toe</h1>
+		<title>tic tac toe</title>
+	</head>
+	<body>
+		<div id="container">
+			<h1>tic tac toe</h1>
 
-    <div class="board" id="board">
-        <div class="cell" data-index="0"></div>
-        <div class="cell" data-index="1"></div>
-        <div class="cell" data-index="2"></div>
-        <div class="cell" data-index="3"></div>
-        <div class="cell" data-index="4"></div>
-        <div class="cell" data-index="5"></div>
-        <div class="cell" data-index="6"></div>
-        <div class="cell" data-index="7"></div>
-        <div class="cell" data-index="8"></div>
-    </div>
+			<div id="currentPlayerTurn">👉x's turn</div>
 
-    <div class="popup" id="popupModal">
-        <div id="popup"></div>
-        <button class="restart" id="restart">restart</button>
-    </div>
+			<div class="board" id="board">
+				<div class="cell" data-index="0"></div>
+				<div class="cell" data-index="1"></div>
+				<div class="cell" data-index="2"></div>
+				<div class="cell" data-index="3"></div>
+				<div class="cell" data-index="4"></div>
+				<div class="cell" data-index="5"></div>
+				<div class="cell" data-index="6"></div>
+				<div class="cell" data-index="7"></div>
+				<div class="cell" data-index="8"></div>
+			</div>
 
-    <footer>
-        <p>©
-            <script>
-                document.write(new Date().getFullYear())
-            </script>
-        <a href="https://github.com/OkiDokiTokiLoki/tic-tac-toe">okiDokiTokiLoki</a>
-	    </p>
-    </footer>
-</body>
+			<div class="popup" id="popupModal">
+				<div id="popup"></div>
+				<button class="restart" id="restart">&#10226;</button>
+			</div>
+
+			<footer>
+				<p>
+					&copy;
+					<span id="yearSpan">
+						<script>
+							document.querySelector("#yearSpan").textContent = new Date().getFullYear();
+						</script>
+					</span>
+					<a href="https://github.com/OkiDokiTokiLoki/tic-tac-toe">OkiDokiTokiLoki</a>
+				</p>
+			</footer>
+		</div>
+	</body>
 </html>
